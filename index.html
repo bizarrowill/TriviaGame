@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivia Game</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<body>
+
+    <div id="start"><!-- start game -->
+        <button type="button" class="btn btn-primary">Start</button> 
+        </div>
+
+    <div id="quiz" style="display: none">
+    <form class="form-horizontal" id="components" role="form">
+        <fieldset>
+
+            <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Text Input</label> 
+    
+                        <div class="component"><!-- Multiple Radios (inline) -->
+                            <div class="form-group">
+                            <label class="col-md-4 control-label" for="radios">Inline Radios</label>
+                            <div class="col-md-4"> 
+                                <label class="radio-inline" for="radios-0">
+                                <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                                1
+                                </label> 
+                                <label class="radio-inline" for="radios-1">
+                                <input type="radio" name="radios" id="radios-1" value="2">
+                                2
+                                </label> 
+                                <label class="radio-inline" for="radios-2">
+                                <input type="radio" name="radios" id="radios-2" value="3">
+                                3
+                                </label> 
+                                <label class="radio-inline" for="radios-3">
+                                <input type="radio" name="radios" id="radios-3" value="4">
+                                4
+                                </label>
+                            </div>
+                        </div>
+
+
+                        
+            </div>
+    
+        </fieldset>
+    </form>
+
+    
+    
+    </div><!-- /quiz -->
+
+    <div id="results" style="display: none"></div>
+        
+        
+    
+    
+</body>
+</html>
