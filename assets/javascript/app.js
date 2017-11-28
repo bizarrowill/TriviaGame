@@ -1,3 +1,104 @@
+// Question Array
+
+var allQuestions = [
+{
+  question: "What is the right answer?",
+  choices: ["First", "Second", "Third"],
+  correctAnswer: 1
+},
+
+{
+  question: "What is the right answer?",
+  choices: ["First", "Second", "Third"],
+  correctAnswer: 0
+},
+
+{
+  question: "What is the right answer?",
+  choices: ["First", "Second", "Third"],
+  correctAnswer: 2
+},
+
+{
+  question: "What is the right answer?",
+  choices: ["First", "Second", "Third"],
+  correctAnswer: 0
+},
+
+{
+  question: "What is the right answer?",
+  choices: ["First", "Second", "Third"],
+  correctAnswer: 1
+},
+
+{
+  question: "What is the right answer?",
+  choices: ["First", "Second", "Third"],
+  correctAnswer: 1
+},
+
+];
+
+// Testing this section
+
+
+
+var currentquestion = 0;
+var correctAnswers = 0;
+
+function setupOptions() {
+  $('#question').html(parseInt(currentquestion) + 1 + ". " + allQuestions[currentquestion].question);
+  var options = allQuestions[currentquestion].choices;
+  var formHtml = '';
+  for (var i = 0; i < options.length; i++) {
+    formHtml += '<div><input type="radio" name="option" value="' + i + '" id="option' + i + '"><label for="option' + i + '">' +
+      allQuestions[currentquestion].choices[i] + '</label></div><br/>';
+      
+  }
+  $('#form').html(formHtml);
+  $("#option0").prop('checked', true);
+};
+
+function checkAns() {
+  if ($("input[name=option]:checked").val() == allQuestions[currentquestion].correctAnswer) {
+    correctAnswers++;
+  };
+};
+
+$(document).ready(function() {
+  
+    $(".jumbotron").hide();
+    $('#start').click(function() {
+      $(".jumbotron").fadeIn();
+      $(this).hide();
+    });
+  
+    
+  
+    setupOptions();
+  
+    $("#done").click(function() {
+      event.preventDefault();
+      checkAns();
+      currentquestion++;
+     
+      if (currentquestion < allQuestions.length) {
+        setupOptions();
+        if (currentquestion == allQuestions.length - 1) {
+          $('#done').html("Submit");
+          $('#done').click(function() {
+            $(".jumbotron").hide();
+            $("#result").html("You correctly answered " + correctAnswers + " out of " + currentquestion + " questions! ").hide();
+            $("#result").fadeIn(1500);
+          });
+  
+        };
+  
+      };
+    });
+  });
+  
+
 //    1st Page   Game Start
 //header
 //on.click start button
@@ -8,36 +109,10 @@
 
 $(document).on('click', "#start", function () {
       $(this).hide();
-    
-  
-      // var num = parseInt($(this).attr('data-random'));
-  
-      // previous += num;
-  
-      
-  
+
       console.log("button clicked!");
   
-      // if(previous > random_result){
-      //     lost++;
-      //     console.log("You Lost!");
-  
-      //     $("#lost").html("Losses: " + lost);
-      //     previous = 0;
-          
-      //     resetAndStart();
-      // }
-      // else if(previous === random_result){
-      //     win++;
-      //     console.log("You Win!");
-  
-      //     $("#win").html("Wins: " + win);
-          
-      //     previous = 0;
-      //     resetAndStart();
-      // }
-      // $("#previous").html("Total Score: " + previous);
-      // console.log(previous);
+     
      
   
   });
@@ -50,15 +125,13 @@ $(document).on('click', "#start", function () {
   //  Variable that will hold our setInterval that runs the stopwatch
   var intervalId;
   
-  //prevents the clock from being sped up unnecessarily
   var clockRunning = false;
   
-  // Our stopwatch object
   var timer = {
     time: 30,
   
     start: function() {
-      // DONE: Use setInterval to start the count here and set the clock to running.
+  
       if (!clockRunning) {
         intervalId = setInterval(timer.count, 1000);
         clockRunning = true;
@@ -66,7 +139,7 @@ $(document).on('click', "#start", function () {
     },
    
     count: function() {
-      // DONE: increment time by 1, remember we cant use "this" here.
+     
       timer.time--;
   
       // DONE: Get the current time, pass that into the timer.timeConverter function,
@@ -99,37 +172,6 @@ $(document).on('click', "#start", function () {
 //     2nd Page  Timer Counting Down and Quesions
 //header
 //timer
-
-	
-
-
-// or
-
-// function pretty_time_string(num) {
-//   return ( num < 10 ? "0" : "" ) + num;
-// }
-
-// var start = new Date;    
-
-// setInterval(function() {
-// var total_seconds = (new Date - start) / 1000;   
-
-// var hours = Math.floor(total_seconds / 3600);
-// total_seconds = total_seconds % 3600;
-
-// var minutes = Math.floor(total_seconds / 60);
-// total_seconds = total_seconds % 60;
-
-// var seconds = Math.floor(total_seconds);
-
-// hours = pretty_time_string(hours);
-// minutes = pretty_time_string(minutes);
-// seconds = pretty_time_string(seconds);
-
-// var currentTimeString = hours + ":" + minutes + ":" + seconds;
-
-// $('.timer').text(currentTimeString);
-// }, 1000);
   
 
 // Trivia questions display on screen below timer
