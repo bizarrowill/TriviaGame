@@ -1,47 +1,46 @@
 // Question Array
 
-var allQuestions = [
-{
-  question: "What is the right answer?",
-  choices: ["First", "Second", "Third"],
-  correctAnswer: 1
-},
+var allQuestions = [{
+    question: "What is the right answer?",
+    choices: ["First", "Second", "Third"],
+    correctAnswer: 1
+  },
 
-{
-  question: "What is the right answer?",
-  choices: ["First", "Second", "Third"],
-  correctAnswer: 0
-},
+  {
+    question: "What is the right answer?",
+    choices: ["First", "Second", "Third"],
+    correctAnswer: 0
+  },
 
-{
-  question: "What is the right answer?",
-  choices: ["First", "Second", "Third"],
-  correctAnswer: 2
-},
+  {
+    question: "What is the right answer?",
+    choices: ["First", "Second", "Third"],
+    correctAnswer: 2
+  },
 
-{
-  question: "What is the right answer?",
-  choices: ["First", "Second", "Third"],
-  correctAnswer: 0
-},
+  {
+    question: "What is the right answer?",
+    choices: ["First", "Second", "Third"],
+    correctAnswer: 0
+  },
 
-{
-  question: "What is the right answer?",
-  choices: ["First", "Second", "Third"],
-  correctAnswer: 1
-},
+  {
+    question: "What is the right answer?",
+    choices: ["First", "Second", "Third"],
+    correctAnswer: 1
+  },
 
-{
-  question: "What is the right answer?",
-  choices: ["First", "Second", "Third"],
-  correctAnswer: 1
-},
+  {
+    question: "What is the right answer?",
+    choices: ["First", "Second", "Third"],
+    correctAnswer: 1
+  },
 
 ];
 
-// Testing this section
+// Testing this section - Function for bringing questions to the page
 
-
+// ----------------------------------------------VARIABLES
 
 var currentquestion = 0;
 var correctAnswers = 0;
@@ -53,7 +52,7 @@ function setupOptions() {
   for (var i = 0; i < options.length; i++) {
     formHtml += '<div><input type="radio" name="option" value="' + i + '" id="option' + i + '"><label for="option' + i + '">' +
       allQuestions[currentquestion].choices[i] + '</label></div><br/>';
-      
+
   }
   $('#form').html(formHtml);
   $("#option0").prop('checked', true);
@@ -65,40 +64,55 @@ function checkAns() {
   };
 };
 
-$(document).ready(function() {
-  
-    $(".jumbotron").hide();
-    $('#start').click(function() {
-      $(".jumbotron").fadeIn();
-      $(this).hide();
-    });
-  
-    
-  
-    setupOptions();
-  
-    $("#done").click(function() {
-      event.preventDefault();
-      checkAns();
-      currentquestion++;
-     
-      if (currentquestion < allQuestions.length) {
-        setupOptions();
-        if (currentquestion == allQuestions.length - 1) {
-          $('#done').html("Submit");
-          $('#done').click(function() {
-            $(".jumbotron").hide();
-            $("#result").html("You correctly answered " + correctAnswers + " out of " + currentquestion + " questions! ").hide();
-            $("#result").fadeIn(1500);
-          });
-  
-        };
-  
-      };
-    });
-  });
-  
+$(document).ready(function () {
 
+  $(".jumbotron").hide();
+  $('#start').click(function () {
+    $(".jumbotron").fadeIn();
+    $(this).hide();
+  });
+
+
+
+  setupOptions();
+
+
+  //-----------------------------------------ON CLICK DONE BUTTON
+  $("#done").click(function () {
+    event.preventDefault();
+    checkAns();
+    currentquestion++;
+    checkAnswers();
+
+
+  });
+});
+
+function checkAnswers() {
+  if (currentquestion < allQuestions.length) {
+    setupOptions();
+    if (currentquestion == allQuestions.length - 1) {
+    displayResults();  
+
+    };
+
+  };
+
+};
+function checkTimer() {
+  if (timer === 0) {
+    displayResults();
+  }
+};
+
+function displayResults() {
+  $('#done').html("Submit");
+  $('#done').click(function () {
+    $(".jumbotron").hide();
+    $("#result").html("You correctly answered " + correctAnswers + " out of " + currentquestion + " questions! ").hide();
+    $("#result").fadeIn(1500);
+  });
+};
 //    1st Page   Game Start
 //header
 //on.click start button
@@ -108,71 +122,74 @@ $(document).ready(function() {
 //       start button
 
 $(document).on('click', "#start", function () {
-      $(this).hide();
+  $(this).hide();
 
-      console.log("button clicked!");
-  
-     
-     
-  
-  });
+  console.log("button clicked!");
 
-  // Timer loads (from Stopwatch activity)
-  window.onload = function() {
-    $("#start").on("click", timer.start);
-  };
-  
-  //  Variable that will hold our setInterval that runs the stopwatch
-  var intervalId;
-  
-  var clockRunning = false;
-  
-  var timer = {
-    time: 30,
-  
-    start: function() {
-  
-      if (!clockRunning) {
-        intervalId = setInterval(timer.count, 1000);
-        clockRunning = true;
-      }
-    },
-   
-    count: function() {
-     
-      timer.time--;
-  
-      // DONE: Get the current time, pass that into the timer.timeConverter function,
-      //       and save the result in a variable.
-      var converted = timer.timeConverter(timer.time);
-      console.log(converted);
-  
-      // DONE: Use the variable we just created to show the converted time in the "display" div.
-      $("#countdownTimer").text(converted);
-    },
-    timeConverter: function(t) {
-      var minutes = Math.floor(t / 60);
-      var seconds = t - minutes * 60;
-  
-      if (seconds < 10) {
-        seconds = "0" + seconds;
-      }
-  
-      if (minutes === 0) {
-        minutes = "00";
-      } else if (minutes < 10) {
-        minutes = "0" + minutes;
-      }
-  
-      return minutes + ":" + seconds;
+
+
+
+});
+
+// Timer loads (from Stopwatch activity)
+window.onload = function () {
+  $("#start").on("click", timer.start);
+};
+
+//  Variable that will hold our setInterval that runs the timer
+var intervalId;
+
+var clockRunning = false;
+
+var timer = {
+  time: 30,
+
+  start: function () {
+
+    if (!clockRunning) {
+      intervalId = setInterval(timer.count, 1000);
+      clockRunning = true;
     }
-  };
-  
+
+  },
+
+  count: function () {
+
+    timer.time--;
+
+    // DONE: Get the current time, pass that into the timer.timeConverter function,
+    //       and save the result in a variable.
+    var converted = timer.timeConverter(timer.time);
+    console.log(converted);
+
+    // DONE: Use the variable we just created to show the converted time in the "display" div.
+    $("#countdownTimer").text(converted);
+  },
+  timeConverter: function (t) {
+    var minutes = Math.floor(t / 60);
+    var seconds = t - minutes * 60;
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    if (minutes === 0) {
+      minutes = "00";
+    } else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    return minutes + ":" + seconds;
+  }
+
+
+};
+
 
 //     2nd Page  Timer Counting Down and Quesions
 //header
 //timer
-  
+
 
 // Trivia questions display on screen below timer
 //radio inline buttons - using bootstrap or jQuery
